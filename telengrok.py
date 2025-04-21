@@ -236,6 +236,7 @@ def generate_verification_code():
             code_status.update({"OPEN": False})
         else:
             code_status.update({"OPEN": True})
+            verification_code = ''.join(random.choices(string.ascii_uppercase + string.digits, k=6)).upper()
             verification_window.destroy()
 
     update_timer(30)
