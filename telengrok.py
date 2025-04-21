@@ -161,7 +161,9 @@ def start_telegram_bot(token):
             if local_saved_chat_id:
                 pass
             else:
-                generate_verification_code()
+                if code_status["OPEN"] == True:
+                    bot.send_message(chat_id, f"📱 Digite o código recebido no seu computador!")
+                    generate_verification_code()
         elif received_text.upper() == verification_code:
             _, local_saved_chat_id = load_config()
             if local_saved_chat_id:
