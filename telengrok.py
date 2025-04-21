@@ -186,8 +186,8 @@ def start_telegram_bot(token):
                 bot.send_message(chat_id, f'⚠ Conecte-se ao seu PC:\nmstsc /v:{current_url}')
                 public_url = current_url
 
-    # Inicializa o ngrok e o bot
-    start_ngrok()
+    # Reinicia o ngrok e o bot
+    reset_ngrok()
     while True:
         try:
             bot.polling(none_stop=True)
