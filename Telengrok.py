@@ -149,14 +149,14 @@ def start_telegram_bot(token):
     @bot.message_handler(commands=['help'])
     def cmd_help(message):
         help_text = (
-        "👋 **Olá! Pronto para dominar sua conexão? Aqui estão os comandos disponíveis:**\n\n"
-        "📝 **/register** – Cadastre seu ID do Telegram e conecte ao seu PC.\n"
-        "🚀 **/start** – Inicia a conexão com seu PC via **mstsc** (Área de Trabalho Remota).\n"
-        "♻️ **/reset** – Reinicia a conexão e gera uma nova URL do **ngrok**.\n"
-        "🛑 **/stop** – Encerra o túnel do **ngrok** e fecha a conexão.\n"
-        "🧹 **/default** – Limpa todos os dados salvos (TOKEN e ID). Comece do zero!\n"
-        "📂 **/config** – Abre o arquivo de configuração (**config.json**) pra ajustes manuais.\n"
-        "❓ **/help** – Exibe esta central de comandos novamente."
+        "👋 Olá! Pronto para dominar sua conexão? Aqui estão os comandos disponíveis:\n\n"
+        "📝 /register – Cadastre seu ID do Telegram e conecte ao seu PC.\n"
+        "🚀 /start – Inicia a conexão com seu PC via mstsc (Área de Trabalho Remota).\n"
+        "♻️ /reset – Reinicia a conexão e gera uma nova URL do ngrok.\n"
+        "🛑 /stop – Encerra o túnel do ngrok e fecha a conexão.\n"
+        "🧹 /default – Limpa todos os dados salvos (TOKEN e ID). Comece do zero!\n"
+        "📂 /config – Abre o arquivo de configuração (config.json) pra ajustes manuais.\n"
+        "❓ /help – Exibe esta central de comandos novamente."
         )
         bot.send_message(message.chat.id, help_text)
 
