@@ -203,6 +203,7 @@ def start_telegram_bot(token):
                 bot.send_message(chat_id, f'⚠ Conecte-se ao seu PC:\nmstsc /v:{current_url}')
                 public_url = current_url
     
+    close_ngrok()
     # Inicia o bot no Telegram
     while True:
         try:
