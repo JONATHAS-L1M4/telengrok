@@ -74,6 +74,10 @@ def reset_ngrok():
     subprocess.run(['taskkill', '/f', '/im', 'ngrok.exe'])
     start_ngrok()
 
+# Fecha o ngrok
+def close_ngrok():
+    subprocess.run(['taskkill', '/f', '/im', 'ngrok.exe'])
+
 # Pega a URL pública do ngrok
 def get_public_url():
     while True:
@@ -99,6 +103,7 @@ def reset_config():
 
 # Inicia o bot do Telegram
 def start_telegram_bot(token):
+
     bot = telebot.TeleBot(token)
     _, saved_chat_id = load_config()
 
@@ -122,6 +127,15 @@ def start_telegram_bot(token):
         reset_ngrok()
         bot.send_message(chat_id, f'🔄 Nova conexão gerada:\nmstsc /v:{get_public_url()}')
 
+    @bot.message_handler(commands=['stop'])
+    def cmd_reset(message):
+        chat_id = message.chat.id
+        _, saved_chat_id = load_config()
+        if str(chat_id) != str(saved_chat_id):
+            return
+        close_ngrok()
+        bot.send_message(chat_id, f'🛑 O processo do ngrok foi fechado. Digite /start para iniciá-lo novamente.')
+
     @bot.message_handler(commands=['default'])
     def cmd_delete_id(message):
         chat_id = message.chat.id
@@ -135,13 +149,14 @@ def start_telegram_bot(token):
     @bot.message_handler(commands=['help'])
     def cmd_help(message):
         help_text = (
-            "👋 Olá! Aqui estão os comandos disponíveis:\n\n"
-            "/register - Registrar seu ID do Telegram para conectar ao PC.\n"
-            "/start - Iniciar a conexão com seu PC via mstsc.\n"
-            "/reset - Reiniciar a conexão e gerar uma nova URL do ngrok.\n"
-            "/default - Apaga todos os dados salvos (TOKEN e ID).\n"
-            "/config - Abre a pasta de configuração (config.json).\n"
-            "/help - Mostrar esta mensagem de ajuda."
+        "👋 **Olá! Pronto para dominar sua conexão? Aqui estão os comandos disponíveis:**\n\n"
+        "📝 **/register** – Cadastre seu ID do Telegram e conecte ao seu PC.\n"
+        "🚀 **/start** – Inicia a conexão com seu PC via **mstsc** (Área de Trabalho Remota).\n"
+        "♻️ **/reset** – Reinicia a conexão e gera uma nova URL do **ngrok**.\n"
+        "🛑 **/stop** – Encerra o túnel do **ngrok** e fecha a conexão.\n"
+        "🧹 **/default** – Limpa todos os dados salvos (TOKEN e ID). Comece do zero!\n"
+        "📂 **/config** – Abre o arquivo de configuração (**config.json**) pra ajustes manuais.\n"
+        "❓ **/help** – Exibe esta central de comandos novamente."
         )
         bot.send_message(message.chat.id, help_text)
 
@@ -213,7 +228,7 @@ def generate_verification_code():
     if code_status["OPEN"] == True:
         pass
     else:
-        return
+        return False
 
     global verification_code, verification_window
     verification_code = ''.join(random.choices(string.ascii_uppercase + string.digits, k=6)).upper()
@@ -238,6 +253,7 @@ def generate_verification_code():
             code_status.update({"OPEN": True})
             verification_code = ''.join(random.choices(string.ascii_uppercase + string.digits, k=6)).upper()
             verification_window.destroy()
+            
 
     update_timer(30)
     verification_window.mainloop()
