@@ -44,7 +44,8 @@ python telengrok.py
 
 ```
 /start     → Inicia conexão com seu PC via mstsc  
-/reset     → Gera uma nova URL ngrok  
+/reset     → Gera uma nova URL ngrok
+/stop      → Encerra o túnel do **ngrok** e fecha a conexão.  
 /default   → Apaga configurações salvas (token e ID)  
 /help      → Lista os comandos  
 /config    → Abre a pasta de configuração  
