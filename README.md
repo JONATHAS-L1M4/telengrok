@@ -1,5 +1,7 @@
 # 🖥️ Telengrok - Conecte-se ao seu PC via Telegram + Ngrok
 
+![Texto Alternativo](https://github.com/JONATHAS-L1M4/telengrok/blob/main/Telengrok.png)
+
 Este projeto permite que você **inicie uma conexão RDP (Área de Trabalho Remota)** com seu PC **via Telegram**, utilizando o poder do `ngrok` para expor a porta 3389 de forma segura e prática.
 
 ---
