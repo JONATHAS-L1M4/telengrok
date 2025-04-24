@@ -106,6 +106,10 @@ def start_telegram_bot(token):
 
     bot = telebot.TeleBot(token)
     _, saved_chat_id = load_config()
+    try:
+        bot.send_message(saved_chat_id, f'🤖 Bot inicializado com sucesso.')
+    except:
+        pass
 
     @bot.message_handler(commands=['start'])
     def cmd_start(message):
